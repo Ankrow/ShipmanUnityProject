@@ -82,6 +82,8 @@
     <Compile Include="Assets\_Complete-Game\Scripts\Player\Done_PlayerMovement.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\Done_PlayerShooting.cs" />
     <Compile Include="Assets\LightController.cs" />
+    <Compile Include="Assets\LightManager.cs" />
+    <Compile Include="Assets\LightPickup.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
