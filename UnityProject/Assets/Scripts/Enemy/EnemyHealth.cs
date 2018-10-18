@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     bool isDead;
     bool isSinking;
 
+    LightController playerLight;
+
 
     void Awake ()
     {
@@ -25,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider = GetComponent <CapsuleCollider> ();
 
         currentHealth = startingHealth;
+        playerLight = GameObject.FindGameObjectWithTag("Player").GetComponent<LightController>();
     }
 
 
@@ -66,6 +69,8 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
+
+        playerLight.light.spotAngle += startingHealth / 100;
     }
 
 
