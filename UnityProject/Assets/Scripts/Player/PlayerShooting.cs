@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
-
+    int ammo = 100;
+    public Text ammoText;
 
     void Awake ()
     {
@@ -53,33 +55,38 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot ()
     {
-        timer = 0f;
-
-        gunAudio.Play ();
-
-        gunLight.enabled = true;
-
-        gunParticles.Stop ();
-        gunParticles.Play ();
-
-        gunLine.enabled = true;
-        gunLine.SetPosition (0, transform.position);
-
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
-
-        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+        if (ammo > 0)
         {
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
-            if(enemyHealth != null)
+            ammo--;
+            ammoText.text = ammo.ToString();
+            timer = 0f;
+
+            gunAudio.Play();
+
+            gunLight.enabled = true;
+
+            gunParticles.Stop();
+            gunParticles.Play();
+
+            gunLine.enabled = true;
+            gunLine.SetPosition(0, transform.position);
+
+            shootRay.origin = transform.position;
+            shootRay.direction = transform.forward;
+
+            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
             {
-                enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                }
+                gunLine.SetPosition(1, shootHit.point);
             }
-            gunLine.SetPosition (1, shootHit.point);
-        }
-        else
-        {
-            gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
-        }
+            else
+            {
+                gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+            }
+        }        
     }
 }

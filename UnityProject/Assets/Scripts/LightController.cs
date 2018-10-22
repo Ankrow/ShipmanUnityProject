@@ -24,6 +24,12 @@ public class LightController : MonoBehaviour {
     {
         while (true)
         {
+            if(light.spotAngle < 1.5f)
+            {
+                print("boop");
+                GetComponent<PlayerHealth>().TakeDamage(1000);
+                break;
+            }
             light.spotAngle -= .1f;
             if (light.spotAngle >=30 )
             {
