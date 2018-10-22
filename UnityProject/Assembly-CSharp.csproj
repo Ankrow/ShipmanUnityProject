@@ -81,6 +81,7 @@
     <Compile Include="Assets\_Complete-Game\Scripts\Player\Done_PlayerHealth.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\Done_PlayerMovement.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\Done_PlayerShooting.cs" />
+    <Compile Include="Assets\AmmoPickup.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -125,12 +126,13 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
+    <Compile Include="Assets\Scripts\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\ItemManager.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
-    <Compile Include="Assets\Scripts\LightManager.cs" />
     <Compile Include="Assets\Scripts\LightPickup.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameOverManager.cs" />
