@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
-    public float timeBetweenBullets = 0.15f;
+    public float timeBetweenBullets = 1.2f;
     public float range = 100f;
 
 
@@ -24,7 +24,6 @@ public class PlayerShooting : MonoBehaviour
     {
         shootableMask = LayerMask.GetMask ("Shootable");
         gunParticles = GetComponent<ParticleSystem> ();
-        //gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
     }
@@ -116,11 +115,11 @@ public class PlayerShooting : MonoBehaviour
                 shootRay.origin = transform.position;
 
                 float x = Random.Range(-0.25f, 0.25f);
-                float y = 0;
+                float y = Random.Range(-0.1f, 0.1f);
                 float z = Random.Range(-0.25f, 0.25f);
                 shootRay.direction = transform.forward + new Vector3(x, y, z);
 
-                if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+                if (Physics.Raycast(shootRay, out shootHit, 7f, shootableMask))
                 {
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
                     if (enemyHealth != null)
@@ -131,7 +130,7 @@ public class PlayerShooting : MonoBehaviour
                 }
                 else
                 {
-                    gunLines[i].SetPosition(1, shootRay.origin + shootRay.direction * range);
+                    gunLines[i].SetPosition(1, shootRay.origin + shootRay.direction * 7f);
                 }
             }           
         }
