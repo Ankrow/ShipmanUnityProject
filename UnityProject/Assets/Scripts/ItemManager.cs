@@ -6,8 +6,10 @@ public class ItemManager : MonoBehaviour {
 
     public Transform[] lightSpawnPoints = new Transform[0];
     public Transform[] ammoSpawnPoints = new Transform[0];
+    public Transform[] healthSpawnPoints = new Transform[0];
     public GameObject lightPickup;
     public GameObject ammoPickup;
+    public GameObject healthPickup;
     private IEnumerator coroutine;
 
 	// Use this for initialization
@@ -25,7 +27,7 @@ public class ItemManager : MonoBehaviour {
     {
         while(true)
         {
-            int randInt = Random.Range(0, 2);
+            int randInt = Random.Range(0, 3);
             if (randInt == 0)
             {
                 Instantiate(lightPickup, lightSpawnPoints[Random.Range(0, lightSpawnPoints.Length - 1)].position, Quaternion.identity);
@@ -34,6 +36,11 @@ public class ItemManager : MonoBehaviour {
             else if (randInt == 1)
             {
                 Instantiate(ammoPickup, ammoSpawnPoints[Random.Range(0, ammoSpawnPoints.Length - 1)].position, Quaternion.identity);
+                yield return new WaitForSeconds(5f);
+            }
+            else if (randInt == 2)
+            {
+                Instantiate(healthPickup, healthSpawnPoints[Random.Range(0, healthSpawnPoints.Length - 1)].position, Quaternion.identity);
                 yield return new WaitForSeconds(5f);
             }
         }
