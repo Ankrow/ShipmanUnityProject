@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject lightPickup;
     public GameObject ammoPickup;
     public GameObject healthPickup;
+    public GameObject gunPickup;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -20,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
     bool isSinking;
 
     LightController playerLight;
+    PlayerShooting playerShooting;
 
 
     void Awake ()
@@ -31,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth = startingHealth;
         playerLight = GameObject.FindGameObjectWithTag("Player").GetComponent<LightController>();
+        playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerShooting>();
     }
 
 
@@ -75,7 +78,11 @@ public class EnemyHealth : MonoBehaviour
 
         playerLight.light.spotAngle += startingHealth / 100;
 
-        if (Random.Range(0, 100) <= Mathf.RoundToInt(startingHealth / 3))
+        if (ScoreManager.score >= 150 && !playerShooting.shotgunUnlocked)
+        {
+            Instantiate(gunPickup, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.identity);
+        }
+        else if (Random.Range(0, 100) <= Mathf.RoundToInt(startingHealth / 3))
         {
             int rand = Random.Range(0, 3);
             switch (rand)

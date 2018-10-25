@@ -9735,6 +9735,7 @@ MonoBehaviour:
   ammoPickup: {fileID: 1908287132066046, guid: e90fd4653e3c9d146b5c6f26030d4b23, type: 2}
   healthPickup: {fileID: 1257685706512364, guid: 302a789da63fca640b5e3486bff059d6,
     type: 2}
+  gunPickup: {fileID: 1401837658790682, guid: 3b3c7bb628133cc42941e2858f8c3d42, type: 2}
 --- !u!114 &114655257912870220
 MonoBehaviour:
   m_ObjectHideFlags: 1
