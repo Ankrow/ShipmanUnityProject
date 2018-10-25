@@ -57,12 +57,14 @@ public class PlayerShooting : MonoBehaviour
             activeGun = 1;
             timeBetweenBullets = 0.15f;
             damagePerShot = 20;
+            ammoText.text = rifleAmmo.ToString();
         }
         if (Input.GetKeyDown("2") && shotgunUnlocked)
         {
             activeGun = 2;
             timeBetweenBullets = 0.75f;
             damagePerShot = 50;
+            ammoText.text = shotgunAmmo.ToString();
         }
     }
 
