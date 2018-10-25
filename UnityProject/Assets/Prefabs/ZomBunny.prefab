@@ -253,6 +253,11 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  lightPickup: {fileID: 1970914153175960, guid: 8f14b6bdc5d4d4b4283785aeb1a10525,
+    type: 2}
+  ammoPickup: {fileID: 1908287132066046, guid: e90fd4653e3c9d146b5c6f26030d4b23, type: 2}
+  healthPickup: {fileID: 1257685706512364, guid: 302a789da63fca640b5e3486bff059d6,
+    type: 2}
 --- !u!114 &114590214983932310
 MonoBehaviour:
   m_ObjectHideFlags: 1

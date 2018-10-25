@@ -8,6 +8,9 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 10;
     public AudioClip deathClip;
 
+    public GameObject lightPickup;
+    public GameObject ammoPickup;
+    public GameObject healthPickup;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -71,6 +74,24 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play ();
 
         playerLight.light.spotAngle += startingHealth / 100;
+
+        if (Random.Range(0, 100) <= Mathf.RoundToInt(startingHealth / 3))
+        {
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 1:
+                    Instantiate(lightPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(ammoPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(healthPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                    break;
+            }
+            
+        }
     }
 
 

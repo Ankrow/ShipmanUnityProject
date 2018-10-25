@@ -22,10 +22,12 @@ public class AmmoPickupItem : MonoBehaviour {
             if (playerShooting.activeGun == 1)
             {
                 playerShooting.rifleAmmo += 25;
+                playerShooting.shotgunAmmo += 6;
                 playerShooting.ammoText.text = playerShooting.rifleAmmo.ToString();
             }
             else if (playerShooting.activeGun == 2)
             {
+                playerShooting.rifleAmmo += 25;
                 playerShooting.shotgunAmmo += 6;
                 playerShooting.ammoText.text = playerShooting.shotgunAmmo.ToString();
             }
