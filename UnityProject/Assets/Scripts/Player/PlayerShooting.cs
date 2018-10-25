@@ -4,9 +4,8 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
-    public float timeBetweenBullets = 1.2f;
+    public float timeBetweenBullets = 0.2f;
     public float range = 100f;
-
 
     float timer;
     Ray shootRay = new Ray();
@@ -17,8 +16,11 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
-    public int ammo = 100;
+    public int rifleAmmo = 50;
+    public int shotgunAmmo = 12;
     public Text ammoText;
+    public bool shotgunUnlocked = false;
+    public int activeGun = 1;
 
     void Awake ()
     {
@@ -35,12 +37,32 @@ public class PlayerShooting : MonoBehaviour
 
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            ShootShotgun();
+            if (activeGun == 1)
+            {
+                Shoot();
+            }
+            else if (activeGun == 2) 
+            {
+                ShootShotgun();
+            }
         }
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
         {
             DisableEffects ();
+        }
+
+        if (Input.GetKeyDown("1") && shotgunUnlocked)
+        {
+            activeGun = 1;
+            timeBetweenBullets = 0.15f;
+            damagePerShot = 20;
+        }
+        if (Input.GetKeyDown("2") && shotgunUnlocked)
+        {
+            activeGun = 2;
+            timeBetweenBullets = 0.75f;
+            damagePerShot = 50;
         }
     }
 
@@ -57,10 +79,10 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot ()
     {
-        if (ammo > 0)
+        if (rifleAmmo > 0)
         {
-            ammo--;
-            ammoText.text = ammo.ToString();
+            rifleAmmo--;
+            ammoText.text = rifleAmmo.ToString();
             timer = 0f;
 
             gunAudio.Play();
@@ -94,10 +116,10 @@ public class PlayerShooting : MonoBehaviour
 
     void ShootShotgun()
     {
-        if (ammo > 0)
+        if (shotgunAmmo > 0)
         {
-            ammo--;
-            ammoText.text = ammo.ToString();
+            shotgunAmmo--;
+            ammoText.text = shotgunAmmo.ToString();
             timer = 0f;
 
             gunAudio.Play();            

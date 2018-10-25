@@ -18,7 +18,16 @@ public class AmmoPickupItem : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponentInChildren<PlayerShooting>().ammo += 25;
+            PlayerShooting playerShooting = other.GetComponentInChildren<PlayerShooting>();
+            if (playerShooting.activeGun == 1)
+            {
+                playerShooting.rifleAmmo += 25;
+            }
+            else if (playerShooting.activeGun == 2)
+            {
+                playerShooting.shotgunAmmo += 6;
+            }
+            
             Destroy(gameObject);
         }
     }
