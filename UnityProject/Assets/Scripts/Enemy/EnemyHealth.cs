@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     LightController playerLight;
     PlayerShooting playerShooting;
-
+    PlayerHealth playerHealth;
 
     void Awake ()
     {
@@ -32,8 +32,10 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider = GetComponent <CapsuleCollider> ();
 
         currentHealth = startingHealth;
-        playerLight = GameObject.FindGameObjectWithTag("Player").GetComponent<LightController>();
-        playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerShooting>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerLight = player.GetComponent<LightController>();
+        playerShooting = player.GetComponentInChildren<PlayerShooting>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
 
@@ -78,26 +80,42 @@ public class EnemyHealth : MonoBehaviour
 
         playerLight.light.spotAngle += startingHealth / 100;
 
-        if (ScoreManager.score >= 150 && !playerShooting.shotgunUnlocked)
+        print(Mathf.RoundToInt(startingHealth / 3).ToString());
+        if (ScoreManager.score >= 150 && !playerShooting.shotgunUnlocked && !playerShooting.shotgunSpawned)
         {
             Instantiate(gunPickup, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.identity);
+            playerShooting.shotgunSpawned = true;
         }
         else if (Random.Range(0, 100) <= Mathf.RoundToInt(startingHealth / 3))
         {
-            int rand = Random.Range(0, 3);
-            switch (rand)
+            if (playerShooting.rifleAmmo < 10 || playerShooting.shotgunAmmo < 4)
             {
-                case 1:
-                    Instantiate(lightPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
-                    break;
-                case 2:
-                    Instantiate(ammoPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
-                    break;
-                case 3:
-                    Instantiate(healthPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
-                    break;
+                Instantiate(ammoPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
             }
-            
+            else if (playerHealth.currentHealth < 75)
+            {
+                Instantiate(healthPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+            }
+            else if (playerLight.light.spotAngle < 15f)
+            {
+                Instantiate(lightPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+            }
+            else
+            {
+                int rand = Random.Range(0, 3);
+                switch (rand)
+                {
+                    case 1:
+                        Instantiate(lightPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                        break;
+                    case 2:
+                        Instantiate(ammoPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                        break;
+                    case 3:
+                        Instantiate(healthPickup, new Vector3(transform.position.x, 0.25f, transform.position.z), Quaternion.identity);
+                        break;
+                }
+            }
         }
     }
 

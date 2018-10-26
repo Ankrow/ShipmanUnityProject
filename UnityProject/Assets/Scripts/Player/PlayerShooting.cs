@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
@@ -21,6 +23,9 @@ public class PlayerShooting : MonoBehaviour
     public Text ammoText;
     public bool shotgunUnlocked = false;
     public int activeGun = 1;
+    public bool shotgunSpawned = false;
+    public AudioSource reload;
+    private bool reloading;
 
     void Awake ()
     {
@@ -114,6 +119,10 @@ public class PlayerShooting : MonoBehaviour
                 gunLines[0].SetPosition(1, shootRay.origin + shootRay.direction * range);
             }
         }
+        else if (!reloading)
+        {
+            StartCoroutine("Reload");
+        }
     }
 
     void ShootShotgun()
@@ -158,5 +167,16 @@ public class PlayerShooting : MonoBehaviour
                 }
             }           
         }
+    }
+
+    IEnumerator Reload()
+    {
+        reloading = true;
+        reload.Play();
+        yield return new WaitForSeconds(1f);
+        rifleAmmo = 25;
+        ammoText.text = rifleAmmo.ToString();
+        reloading = false;
+        yield break;
     }
 }

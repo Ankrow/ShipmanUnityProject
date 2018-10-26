@@ -7,6 +7,8 @@ public class LightController : MonoBehaviour {
 
 	public Light light;
     private IEnumerator coroutine;
+    private float timer = 0;
+    private float darknessSpeed = 0.1f;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +19,9 @@ public class LightController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//light.spotAngle--;
-	}
+        //light.spotAngle--;
+        timer += Time.deltaTime;
+    }
 
     IEnumerator LightFade()
     {
@@ -26,11 +29,25 @@ public class LightController : MonoBehaviour {
         {
             if(light.spotAngle < 1.5f)
             {
-                print("boop");
+                //print("boop");
                 GetComponent<PlayerHealth>().TakeDamage(1000);
                 break;
             }
-            light.spotAngle -= .1f;
+            light.spotAngle -= 0.1f;
+
+            if (timer > 30f && timer < 60f)
+            {
+                darknessSpeed = 0.075f;
+            }
+            else if (timer > 60f && timer < 120f)
+            {
+                darknessSpeed = 0.05f;
+            }
+            else if (timer > 120f)
+            {
+                darknessSpeed = 0.025f;
+            }
+
             if (light.spotAngle >=30 )
             {
                 NavMeshAgent[] enemies = FindObjectsOfType<NavMeshAgent>();
@@ -55,7 +72,7 @@ public class LightController : MonoBehaviour {
                     enemy.GetComponent<NavMeshAgent>().speed = 5f;
                 }
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(darknessSpeed);
         }
     }
 }
