@@ -26,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
     public bool shotgunSpawned = false;
     public AudioSource reload;
     private bool reloading;
+    public GameObject grenade;
 
     void Awake ()
     {
@@ -44,7 +45,8 @@ public class PlayerShooting : MonoBehaviour
         {
             if (activeGun == 1)
             {
-                Shoot();
+                ShootGrenadeLauncher();
+                //Shoot();
             }
             else if (activeGun == 2) 
             {
@@ -167,6 +169,20 @@ public class PlayerShooting : MonoBehaviour
                 }
             }           
         }
+    }
+
+    void ShootGrenadeLauncher()
+    {
+        timer = 0f;
+
+        gunAudio.Play();
+
+        gunLight.enabled = true;
+
+        gunParticles.Stop();
+        gunParticles.Play();
+        GameObject grenadeProjectile = Instantiate(grenade, transform.position, Quaternion.identity);
+        grenadeProjectile.GetComponent<Rigidbody>().velocity = ((transform.forward * 12) + (transform.up * 3));
     }
 
     IEnumerator Reload()

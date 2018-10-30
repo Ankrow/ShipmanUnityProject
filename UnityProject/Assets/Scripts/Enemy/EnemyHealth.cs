@@ -80,7 +80,7 @@ public class EnemyHealth : MonoBehaviour
 
         playerLight.light.spotAngle += startingHealth / 100;
 
-        print(Mathf.RoundToInt(startingHealth / 3).ToString());
+        //print(Mathf.RoundToInt(startingHealth / 3).ToString());
         if (ScoreManager.score >= 150 && !playerShooting.shotgunUnlocked && !playerShooting.shotgunSpawned)
         {
             Instantiate(gunPickup, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.identity);
